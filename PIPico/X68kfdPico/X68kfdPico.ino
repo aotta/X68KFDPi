@@ -77,56 +77,78 @@ void loop() {
   unsigned int DF1=1; // 0=eject, 1=insert, 2=lock, 3=blink
   unsigned int bit0Blink=0;
   unsigned int bit1Blink=0;
+  unsigned int BlinkCounter=0;
    
   // put your main code here, to run repeatedly:
 
  while(1) {
+
+    BlinkCounter++;
+    if (BlinkCounter>=1000) BlinkCounter=0;
     
     if (digitalRead(BT_FD0)) {
        if (DF0==1) {
         DF0=0;
       } else {
         DF0=1;
-        digitalWrite(LED_FD0_RED,LOW);
-      }
+       }
     Serial.print("DF0:");Serial.println(DF0);
-    delay(300);
+    delay(200);
+    bit0Blink=0;
     digitalWrite(FDDINT,LOW);
     }
 
   if (digitalRead(BT_FD1)==HIGH) {
-      if (DF1==1) {
+       if (DF1==1) {
         DF1=0;
       } else {
-        digitalWrite(LED_FD1_RED,LOW);
         DF1=1;
       }
     Serial.print("DF1:");Serial.println(DF1);
-    delay(300);
+    bit1Blink=0;
+    delay(200);
     digitalWriteFast(FDDINT,LOW);
     }
 
-   if (digitalRead(OPT0)==LOW) {
+  if (digitalRead(OPT0)==LOW) {
+    
     if (digitalRead(Eject)==LOW) {
        DF0=0;
        digitalWrite(FDDINT,LOW);
        Serial.print("Ej 0-");
     }
+    
+      if (digitalReadFast(LED_BLINK)==LOW) {
+      digitalWriteFast(LEDFD0,LOW);
+      bit0Blink=1;
+      Serial.print("Led Blink 0-");
+      }
+ 
+    if (DF0==0) {
+        digitalWriteFast(LEDFD0,LOW);
+        digitalWriteFast(Inserted,HIGH);  // for TT!!        
+      } else {
+        digitalWriteFast(Inserted,LOW);
+         digitalWriteFast(Error,HIGH);  
+         digitalWriteFast(FDDINT,HIGH);  // not remove!! 
+         digitalWriteFast(LEDFD0,HIGH);
+      }
 
     if (digitalReadFast(EjectMSK)==LOW) {
       digitalWriteFast(LED_FD0_RED,HIGH);
+    //   Serial.print("EjMSK 0-");
       } else {
       digitalWriteFast(LED_FD0_RED,LOW);
     }
-    if (DF0==1) {
-        digitalWriteFast(Inserted,LOW);
-        digitalWriteFast(FDDINT,HIGH); //not remove
-        digitalWriteFast(LEDFD0,HIGH);
+  
+    if (bit0Blink==1) {
+      if (BlinkCounter>=620) {
+        digitalWrite(LEDFD0,HIGH);
       } else {
-         digitalWriteFast(Inserted,HIGH);
-     //    digitalWriteFast(FDDINT,LOW);  
-         digitalWriteFast(LEDFD0,LOW);
+        digitalWrite(LEDFD0,LOW);
       }
+    }
+
    }  // opt 0
 
  if (digitalReadFast(OPT1)==LOW) {
@@ -135,22 +157,37 @@ void loop() {
       digitalWriteFast(FDDINT,LOW);
       Serial.print("Ej 1-");
     }
-   
-   if (digitalReadFast(EjectMSK)==LOW) {
+     
+     if (DF1==0) {
+        digitalWriteFast(LEDFD1,LOW);
+        digitalWriteFast(Inserted,HIGH);  // for TT!!        
+      } else {
+        digitalWriteFast(Inserted,LOW);
+         digitalWriteFast(Error,HIGH);  
+         digitalWriteFast(FDDINT,HIGH);  // not remove!! 
+         digitalWriteFast(LEDFD1,HIGH);
+      }
+
+    if (digitalReadFast(EjectMSK)==LOW) {
       digitalWriteFast(LED_FD1_RED,HIGH);
+     // Serial.print("EjMSK 1-");
       } else {
       digitalWriteFast(LED_FD1_RED,LOW);
     }
-    
-     if (DF1==1) {
-        digitalWriteFast(Inserted,LOW);
-        digitalWriteFast(FDDINT,HIGH);  // not remove!!!
-        digitalWriteFast(LEDFD1,HIGH);
+
+      if (digitalReadFast(LED_BLINK)==LOW) {
+      digitalWriteFast(LEDFD1,LOW);
+      bit1Blink=1;
+      Serial.print("Led Blink 1-");
+      }
+
+    if (bit1Blink==1) {
+      if (BlinkCounter>=620) {
+        digitalWrite(LEDFD1,HIGH);
       } else {
-         digitalWriteFast(Inserted,HIGH);
-      //   digitalWriteFast(FDDINT,LOW); 
-         digitalWriteFast(LEDFD1,LOW);
-      } 
+        digitalWrite(LEDFD1,LOW);
+      }
+    }  
   
   } //opt1
   
