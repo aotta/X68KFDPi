@@ -75,21 +75,21 @@ void setup() {
 void loop() {
   unsigned int DF0=1; // 0=eject, 1=insert, 2=lock, 3=blink
   unsigned int DF1=1; // 0=eject, 1=insert, 2=lock, 3=blink
-  unsigned int bit0Blink=0;
-  unsigned int bit1Blink=0;
-  unsigned char BlinkCounter=0;
+  unsigned int bitBlink=0;
+  unsigned int BlinkCounter=0;
    
   // put your main code here, to run repeatedly:
-
+ Serial.println("Start");
  while(1) {
 
     BlinkCounter++;
+    if (BlinkCounter>=300) BlinkCounter=0;
     
     if (digitalRead(BT_FD0)) {
        if (DF0==1) {
         DF0=0;
       } else {
-        bit0Blink=0;
+        bitBlink=0;
         DF0=1;
        }
     Serial.print("DF0:");Serial.println(DF0);
@@ -101,7 +101,7 @@ void loop() {
        if (DF1==1) {
         DF1=0;
       } else {
-        bit1Blink=0;
+        bitBlink=0;
         DF1=1;
       }
     Serial.print("DF1:");Serial.println(DF1);
@@ -109,14 +109,19 @@ void loop() {
     digitalWriteFast(FDDINT,LOW);
     }
 
-  while (!digitalReadFast(OPT0)) {
+  if (!digitalReadFast(LED_BLINK)) {
+       bitBlink=1;
+     // Serial.print("Led Blink");
+      }    
 
+  if (!digitalReadFast(OPT0)) {
+  
+    
      if (!digitalReadFast(Eject)) {
        DF0=0;
        digitalWriteFast(FDDINT,LOW);
     //   Serial.print("Ej 0-");
     }
- 
  
     if (!DF0) {
         digitalWriteFast(LEDFD0,LOW);
@@ -135,30 +140,15 @@ void loop() {
       digitalWriteFast(LED_FD0_RED,LOW);
     }
 
-     if (!digitalReadFast(LED_BLINK)) {
-       bit0Blink=1;
-      Serial.print("Led Blink 0-");
-      }    
-     
-    if (bit0Blink) {
-      if (BlinkCounter>=190) {
-        digitalWriteFast(LEDFD0,HIGH);
-      } else {
-        digitalWriteFast(LEDFD0,LOW);
-      }
-    }
-    
+ }  // opt 0
 
-   }  // opt 0
-
- while (!digitalReadFast(OPT1)) {
-     
+ if (!digitalReadFast(OPT1)) {
+ 
   if (!(digitalReadFast(Eject))) {
       DF1=0;
       digitalWriteFast(FDDINT,LOW);
   //    Serial.print("Ej 1-");
     }
-    
      
    if (!DF1) {
         digitalWriteFast(LEDFD1,LOW);
@@ -177,20 +167,25 @@ void loop() {
       digitalWriteFast(LED_FD1_RED,LOW);
     }
 
-   if (!(digitalReadFast(LED_BLINK))) {
-      bit1Blink=1;
-      Serial.print("Led Blink 1-");
+  } //opt1
+
+  if (bitBlink==0) {
+    delay(2);
+    if (!DF0) {
+      if (BlinkCounter<=100) {
+        digitalWriteFast(LEDFD0,HIGH);
+      } else {
+        digitalWriteFast(LEDFD0,LOW);
       }
-  
-   if (bit1Blink) {
-      if (BlinkCounter>=190) {
+    }
+    if (!DF1) {
+      if (BlinkCounter<=100) {
         digitalWriteFast(LEDFD1,HIGH);
       } else {
         digitalWriteFast(LEDFD1,LOW);
       }
-    }  
- 
-  } //opt1
+    }
+  }
   
  } //while
  
