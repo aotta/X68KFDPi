@@ -169,7 +169,7 @@ void loop() {
 
   } //opt1
 
-  if (bitBlink==0) {
+  if (bitBlink==1) {
     delay(2);
     if (!DF0) {
       if (BlinkCounter<=100) {
