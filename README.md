@@ -8,6 +8,6 @@ Now it works for all games i tested so far, but led blinking is not fully suppor
 More info on nfg.forums : https://nfggames.com/forum2/index.php?board=14.0
 
 
-![ScreenShot](https://raw.githubusercontent.com/aotta/X68KFDUINO/main/example2.jpg)
-![ScreenShot](https://raw.githubusercontent.com/aotta/X68KFDUINO/main/example3.jpg)
-![ScreenShot](https://raw.githubusercontent.com/aotta/X68KFDUINO/main/example4.jpg)
+![ScreenShot](https://raw.githubusercontent.com/aotta/X68KFDUINO/main/doc/x68kfdpi02.jpg)
+![ScreenShot](https://raw.githubusercontent.com/aotta/X68KFDUINO/main/doc/x68kfdpi03.jpg)
+![ScreenShot](https://raw.githubusercontent.com/aotta/X68KFDUINO/main/doc/x68kfdpi08.jpg)
