@@ -11,3 +11,5 @@ More info on nfg.forums : https://nfggames.com/forum2/index.php?board=14.0
 ![ScreenShot](https://raw.githubusercontent.com/aotta/X68KFDPi/main/doc/x68kfdpi02.jpg)
 ![ScreenShot](https://raw.githubusercontent.com/aotta/X68KFDPi/main/doc/x68kfdpi03.jpg)
 ![ScreenShot](https://raw.githubusercontent.com/aotta/X68KFDPi/main/doc/x68kfdpi08.jpg)
+![ScreenShot](https://raw.githubusercontent.com/aotta/X68KFDPi/main/doc/x68kfdpi06.jpg)
+![ScreenShot](https://raw.githubusercontent.com/aotta/X68KFDPi/main/doc/x68kfdpi10.jpg)
