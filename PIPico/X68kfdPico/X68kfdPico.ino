@@ -73,17 +73,17 @@ void setup() {
 }
 
 void loop() {
-  unsigned int DF0=1; // 0=eject, 1=insert, 2=lock, 3=blink
-  unsigned int DF1=1; // 0=eject, 1=insert, 2=lock, 3=blink
-  unsigned int bitBlink=0;
-  unsigned int BlinkCounter=0;
+  unsigned char DF0=1; // 0=eject, 1=insert, 2=lock, 3=blink
+  unsigned char DF1=1; // 0=eject, 1=insert, 2=lock, 3=blink
+  unsigned char bitBlink=0;
+  unsigned short int BlinkCounter=0;
    
   // put your main code here, to run repeatedly:
  Serial.println("Start");
  while(1) {
 
     BlinkCounter++;
-    if (BlinkCounter>=300) BlinkCounter=0;
+    if (BlinkCounter>=29999) BlinkCounter=0;
     
     if (digitalRead(BT_FD0)) {
        if (DF0==1) {
@@ -170,19 +170,21 @@ void loop() {
   } //opt1
 
   if (bitBlink==1) {
-    delay(2);
     if (!DF0) {
-      if (BlinkCounter<=100) {
-        digitalWriteFast(LEDFD0,HIGH);
-      } else {
+       Serial.print("b0"); // do not remove, needed for timing
+
+      if (BlinkCounter>=3000) {
         digitalWriteFast(LEDFD0,LOW);
+      } else {
+        digitalWriteFast(LEDFD0,HIGH);
       }
     }
     if (!DF1) {
-      if (BlinkCounter<=100) {
-        digitalWriteFast(LEDFD1,HIGH);
-      } else {
+      Serial.print("b1"); // do not remove, needed for timing
+    if (BlinkCounter>=3000) {
         digitalWriteFast(LEDFD1,LOW);
+      } else {
+        digitalWriteFast(LEDFD1,HIGH);
       }
     }
   }
