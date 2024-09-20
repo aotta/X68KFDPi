@@ -164,7 +164,8 @@ void loop() {
       digitalWriteFast(LED_FD1_RED,LOW);
     }
     
- 
+     digitalWrite(FDDINT,HIGH);
+  
   } //opt1
 
   if (!DF0) {
