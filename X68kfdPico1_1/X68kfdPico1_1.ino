@@ -126,7 +126,7 @@ void loop() {
       // Serial.println("Ej 0-");
     }      
     if (!DF0) {
-        digitalWriteFast(Inserted,HIGH);  // for TT!!        
+      //  digitalWriteFast(Inserted,HIGH);  // for TT!!        
       } else {
         digitalWriteFast(Inserted,LOW);
          digitalWriteFast(Error,HIGH);  
@@ -152,7 +152,7 @@ void loop() {
     }
       
    if (!DF1) {
-        digitalWriteFast(Inserted,HIGH);  // for TT!!        
+      //  digitalWriteFast(Inserted,HIGH);  // for TT!!        
       } else {
         digitalWriteFast(Inserted,LOW);
          digitalWriteFast(Error,HIGH);  
