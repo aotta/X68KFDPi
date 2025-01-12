@@ -3,6 +3,9 @@
  * by Andrea Ottaviani june 2023
  * 
  * 
+
+ v.1.1 - improved signal checks
+ 
 Access/Write strobe :
 
 /OPTION_SEL_X : "Chip select" for the extra functions of drive DSX (X: 0-3)
@@ -120,7 +123,7 @@ void loop() {
     if (!digitalReadFast(Eject)) {   // era Eject
        DF0=0;
     //   digitalWriteFast(FDDINT,LOW);   // ERA LOW
-       Serial.println("Ej 0-");
+      // Serial.println("Ej 0-");
     }      
     if (!DF0) {
         digitalWriteFast(Inserted,HIGH);  // for TT!!        
@@ -133,7 +136,7 @@ void loop() {
     if (!digitalReadFast(EjectMSK)) {
       digitalWriteFast(LED_FD0_RED,HIGH);
       digitalWriteFast(LEDFD0,LOW);
-       Serial.print("EjMSK 0-");
+      // Serial.print("EjMSK 0-");
       } else {
       digitalWriteFast(LED_FD0_RED,LOW);
     }
@@ -145,7 +148,7 @@ void loop() {
     if (!(digitalReadFast(Eject))) { // era eject
      DF1=0;
      //digitalWriteFast(FDDINT,LOW);
-     Serial.println("Ej 1-");
+     //Serial.println("Ej 1-");
     }
       
    if (!DF1) {
@@ -159,7 +162,7 @@ void loop() {
     if (!digitalReadFast(EjectMSK)) {
       digitalWriteFast(LED_FD1_RED,HIGH);
       digitalWriteFast(LEDFD1,LOW);
-     Serial.print("EjMSK 1-");
+     //Serial.print("EjMSK 1-");
       } else {
       digitalWriteFast(LED_FD1_RED,LOW);
     }
