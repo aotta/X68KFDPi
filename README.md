@@ -1,7 +1,7 @@
 # X68KFDPi
 Sharp X68000 Floppy disk adapter based on Raspberry Pico(C)
 
-addedd v.1.1: (last night build) - it should improve reading signals and avoid pressing button when floppy inserted
+addedd v.1.1: (last night build) - it should improve reading signals and avoid pressing button when floppy inserted (work in progress, for testing purpouse only!)
 
 Use 2 buttons to give X68k the insert/eject signals: you have to eject the virtual floppy (turn off green led) when led flashes, select the image on HxC/Gotek, then re-insert the virtual floppy (Green led re-turned on).
 This for disk 1 or 2, as needed.
